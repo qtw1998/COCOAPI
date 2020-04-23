@@ -18,11 +18,11 @@
 
 ### 2.1 COCO-API criteria
 
-2.1.1 Default settings
+#### 2.1.1 Default settings
 
 ![image-20200423205351356](https://site-pictures.oss-eu-west-1.aliyuncs.com/q8onq.png)
 
-2.1.2 Testing Results on BDD100K (YOLOv3-SPP3)
+#### 2.1.2 Testing Results on BDD100K (YOLOv3-SPP3)
 
 ```bash
 (xxxx) [xxxxx@head1 yolov3]$ CUDA_VISIBLE_DEVICES=3,4,5,6,7 python test.py
@@ -74,4 +74,3 @@ Accumulating evaluation results...
  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.464
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.538
 ```
-
