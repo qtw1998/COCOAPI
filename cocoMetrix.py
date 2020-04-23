@@ -16,8 +16,10 @@ from absl import logging
 from pathlib import Path
 
 import numpy as np
+import copy
 from pycocotools.coco import COCO
 from pycocotools.cocoeval import COCOeval
+
 
 FLAGS = flags.FLAGS
 
@@ -81,12 +83,10 @@ class EvaluationMetric(object):
         cocoEval.summarize() 
         return cocoEval
     
-    @staticmethod
-    def _save_json(path_of_result_json):
+    def _save_json(self, path_of_result_json):
         assert type(path_of_result_json) == str, "type of result json file path is str"
-        ann_json_list = self.ann_json_list
         with open(path_of_result_json, 'w') as f:
-            json.dump(ann_json_list, f)
+            json.dump(self.ann_json_list, f)
 
     def _produce_result_json(self):
         """return loadRes
@@ -95,19 +95,19 @@ class EvaluationMetric(object):
         _tmp_result = COCO()
         _tmp_result.dataset['images'] = [img for img in self.coco_gt.dataset['images']]
         self.ann_in_detections = json.load(open(self.result))
-        assert type(ann_in_detections) == list, 'results in not an array of objects'
-        annsImgId_list = [ann['image_id'] for ann in ann_in_detections]
+        assert type(self.ann_in_detections) == list, 'results in not an array of objects'
+        annsImgId_list = [ann['image_id'] for ann in self.ann_in_detections]
         assert set(annsImgId_list) == (set(annsImgId_list) & set(self.coco_gt.getImgIds())), \
                 "Results do not correspond to current coco set"
-        if 'bbox' in ann_in_detections[0] and not ann_in_detections[0]['bbox'] == []:
+        if 'bbox' in self.ann_in_detections[0] and not self.ann_in_detections[0]['bbox'] == []:
             _tmp_result.dataset['categories'] = copy.deepcopy(self.coco_gt.dataset['categories'])
-            for id, ann in enumerate(ann_in_detections):
+            for id, ann in enumerate(self.ann_in_detections):
                 bb = ann['bbox']
                 x1, x2, y1, y2 = [bb[0], bb[0]+bb[2], bb[1], bb[1]+bb[3]]
                 ann['area'] = bb[2]*bb[3]
                 ann['id'] = id+1
-        _tmp_result.dataset['annotations'] = ann_in_detections
-        _tmp_result.creatIndex()
+        _tmp_result.dataset['annotations'] = self.ann_in_detections
+        _tmp_result.createIndex()
         return _tmp_result
         
 
