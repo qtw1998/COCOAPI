@@ -1,6 +1,30 @@
 # COCOAPI
-take YOLOv3 as instance
-```
+
+>  take YOLOv3 as instance
+
+## 1 Waiting List
+
+- [x] Restructured the COCO API Remember download `pycocotools` filefolder at the same time.
+
+    > `cocoMetrix.py`
+
+- [ ] Upload the Conversion Codes
+
+    - [ ] BDD100K(JSON) → VOC(XML & TXT) 
+    - [ ] VOC(XML & TXT) →COCO(JSON-integrated)
+    - [ ] TFRecord & validation-JSON
+
+## 2 Usage
+
+### 2.1 COCO-API criteria
+
+2.1.1 Default settings
+
+![image-20200423205351356](https://site-pictures.oss-eu-west-1.aliyuncs.com/q8onq.png)
+
+2.1.2 Testing Results on BDD100K (YOLOv3-SPP3)
+
+```bash
 (xxxx) [xxxxx@head1 yolov3]$ CUDA_VISIBLE_DEVICES=3,4,5,6,7 python test.py
 True
 Namespace(augment=False, batch_size=120, cfg='cfg/yolov3-spp3.cfg', conf_thres=0.001, data='data/bdd100k.data', device='', img_size=640, iou_thres=0.7, save_json=False, single_cls=False, task='test', weights='/cluster/home/qiaotianwei/yolo/yolov33/bdd100k_yolov3-spp3_final.weights')
@@ -49,4 +73,5 @@ Accumulating evaluation results...
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.192
  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.464
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.538
- ```
+```
+
