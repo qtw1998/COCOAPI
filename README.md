@@ -89,7 +89,7 @@ Accumulating evaluation results...
 
 Source Codes: `dataset_convert_toolKits/BDD100KformJson2VOCform`
 
-<img src="https://site-pictures.oss-eu-west-1.aliyuncs.com/zl611.png" style="zoom:50%;" />
+<img src="https://site-pictures.oss-eu-west-1.aliyuncs.com/zl611.png" style="zoom:30%;" />
 
 `python bdd2voc.py --srcDir=xxxx --outputRoot=xxxx`
 
